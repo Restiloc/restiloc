@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- Title -->
+    <string name="title_planning">Planning</string>
+    <string name="title_setting">Settings</string>
+    <string name="title_stat">Statistiques</string>
+
+
 </resources>
