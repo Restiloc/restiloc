@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_planning"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_baseline_date_range_24"
         android:title="@string/title_planning" />
 
     <item
-        android:id="@+id/navigation_stat"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:id="@+id/navigation_statistiques"
+        android:icon="@drawable/ic_baseline_auto_graph_24"
         android:title="@string/title_stat" />
 
     <item
-        android:id="@+id/navigation_setting"
-        android:icon="@drawable/ic_setting_foreground"
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/title_setting" />
 
 </menu>
