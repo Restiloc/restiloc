@@ -3,23 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_planning"
+    >
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="space.ava.restiloc.ui.home.HomeFragment"
+        android:id="@+id/navigation_planning"
+        android:name="space.ava.restiloc.ui.planning.PlanningFragment"
         android:label="@string/title_planning"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_planning" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="space.ava.restiloc.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_statistiques"
+        android:name="space.ava.restiloc.ui.statistiques.StatistiquesFragment"
         android:label="@string/title_stat"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_statistiques" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="space.ava.restiloc.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_settings"
+        android:name="space.ava.restiloc.ui.settings.SettingsFragment"
         android:label="@string/title_setting"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_settings" />
 </navigation>
