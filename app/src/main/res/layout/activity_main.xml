@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:paddingTop="?attr/actionBarSize"
 
-    style="@style/DayNight">
+
+    >
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -19,8 +20,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu"
-        android:background="@color/blue_primary"
-        style="@style/NavBar"/>
+        android:background="@color/dark_blue"
+        />
 
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"

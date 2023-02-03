@@ -9,5 +9,12 @@
     <string name="title_setting">Settings</string>
     <string name="title_stat">Statistiques</string>
 
+    <!-- Subtitle -->
+    <string name="description">Description</string>
+    <string name="informations">Les informations détaillées de votre rendez-vous</string>
+
+
+    <string name="meetings">Vos prochains rendez-vous</string>
+    <string name="icone_de_fichier">icone de fichier</string>
 
 </resources>
