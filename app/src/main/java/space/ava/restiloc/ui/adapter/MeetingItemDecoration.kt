@@ -11,6 +11,6 @@ class MeetingItemDecoration : RecyclerView.ItemDecoration() {
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        outRect.bottom = 20
+        outRect.bottom = 40
     }
 }
