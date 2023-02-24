@@ -3,14 +3,14 @@ package space.ava.restiloc.classes
 data class Mission(
     val id: Int,
     val dateMission: String,
-    val expert: Expert,
-    val garage: Garage,
-    val isFinished: Boolean,
+    val startedAt: Any,
     val kilometersCounter: Int,
     val nameExpertFile: String,
-    val pree: List<Pree>,
+    val isFinished: Int,
     val route: String,
-    val startedAt: Any,
+    val vehicle: Vehicle,
+    val expert: Expert,
+    val garage: Garage,
     val unavailability: Unavailability,
-    val vehicle: Vehicle
+    val pree: List<Pree>,
 )
