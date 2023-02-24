@@ -5,6 +5,6 @@ data class Pree(
     val label: String,
     val description: String,
     val image: String,
+    val signature: String,
     val route: String,
-    val signature: String
 )
