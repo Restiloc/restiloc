@@ -6,7 +6,7 @@ data class Mission(
     val startedAt: Any,
     val kilometersCounter: Int,
     val nameExpertFile: String,
-    val isFinished: Int,
+    val isFinished: Boolean,
     val route: String,
     val vehicle: Vehicle,
     val expert: Expert,
