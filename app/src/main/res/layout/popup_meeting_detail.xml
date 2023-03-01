@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:scrollbars="horizontal"
+    android:padding="0dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/default_margin"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/icone_de_fichier"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_folder_24"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/pop_up_meeting_detail_title"
+        style="@style/TitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_height="wrap_content"
+        android:text="@string/meeting_name"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/cardView2" />
+
+
+    <ImageView
+        android:id="@+id/close_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:contentDescription="@string/close_button"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView2"
+        tools:ignore="RedundantDescriptionCheck" />
+
+
+    <TextView
+        android:id="@+id/pop_up_date"
+        style="@style/TitleTextStyle"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/horaire"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+    <TextView
+        android:id="@+id/pop_up_date_detail"
+        style="@style/SubtitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_date"
+        android:layout_marginEnd="@dimen/default_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_date"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_date" />
+
+    <TextView
+        android:id="@+id/pop_up_type"
+        style="@style/TitleTextStyle"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/type_de_rdv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_date_detail" />
+
+    <TextView
+        android:id="@+id/pop_up_type_detail"
+        style="@style/SubtitleTextStyle"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_type"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_type" />
+
+
+    <TextView
+        android:id="@+id/pop_up_immatriculation"
+        style="@style/TitleTextStyle"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/immatriculation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_type_detail" />
+
+    <TextView
+        android:id="@+id/pop_up_immatriculation_detail"
+        style="@style/SubtitleTextStyle"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_immatriculation"
+        android:layout_marginEnd="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_immatriculation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_immatriculation"  />
+
+    <TextView
+        android:id="@+id/pop_up_model"
+        style="@style/TitleTextStyle"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/modele"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_immatriculation_detail" />
+
+    <TextView
+        android:id="@+id/pop_up_model_detail"
+        style="@style/SubtitleTextStyle"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_modele"
+        android:layout_marginEnd="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_model"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_model"  />
+
+    <TextView
+        android:id="@+id/pop_up_marque"
+        style="@style/TitleTextStyle"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/marque"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_model_detail" />
+
+    <TextView
+        android:id="@+id/pop_up_marque_detail"
+        style="@style/SubtitleTextStyle"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_marque"
+        android:layout_marginEnd="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_marque"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_marque"  />
+
+    <TextView
+        android:id="@+id/pop_up_car_color"
+        style="@style/TitleTextStyle"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/couleur_de_la_voiture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_marque_detail" />
+
+    <TextView
+        android:id="@+id/pop_up_car_color_detail"
+        style="@style/SubtitleTextStyle"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_couleur"
+        android:layout_marginEnd="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/pop_up_car_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pop_up_car_color"  />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/expertiser_ce_vehicule"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pop_up_car_color" />
+
+    <ImageView
+        android:id="@+id/plan"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/plan"
+        android:src="@drawable/carte"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        tools:ignore="ImageContrastCheck" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
