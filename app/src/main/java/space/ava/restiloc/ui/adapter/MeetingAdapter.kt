@@ -6,18 +6,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import space.ava.restiloc.R
 import space.ava.restiloc.classes.Mission
+import space.ava.restiloc.ui.popup.MeetingPopUp
 
 
 class MeetingAdapter (
     private val planningList : List<Mission>,
     private val layoutId: Int) : RecyclerView.Adapter<MeetingAdapter.ViewHolder>()
 {
+
     // Boite pour ranger tous les composants à controler
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val meetingImage: ImageView = view.findViewById(R.id.image_item)
+        //val meetingImage: ImageView = view.findViewById(R.id.image_item)
         val meetingName:TextView? = view.findViewById(R.id.name_item)
         val meetingDescription:TextView? = view.findViewById(R.id.description_item)
     }
@@ -38,8 +39,17 @@ class MeetingAdapter (
         //Glide.with(holder.meetingImage.context)
         //    .load(currentMeeting.vehicle.route)
         //    .into(holder.meetingImage)
-        holder.meetingName?.text = currentMeeting.nameExpertFile
+        holder.meetingName?.text = currentMeeting.folder
         holder.meetingDescription?.text = currentMeeting.dateMission
+
+
+
+        // interaction avec le composant
+        holder.itemView.setOnClickListener {
+            // afficher une popup
+            MeetingPopUp(holder.itemView.context, currentMeeting).show()
+
+        }
     }
 
     override fun getItemCount(): Int = planningList.size
