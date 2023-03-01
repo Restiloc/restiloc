@@ -3,9 +3,10 @@ package space.ava.restiloc.classes
 data class Mission(
     val id: Int,
     val dateMission: String,
-    val startedAt: Any,
+    val startedAt: String,
     val kilometersCounter: Int,
-    val nameExpertFile: String,
+    val folder: String,
+    val type: String,
     val isFinished: Boolean,
     val route: String,
     val vehicle: Vehicle,
