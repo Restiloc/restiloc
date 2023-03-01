@@ -16,5 +16,22 @@
 
     <string name="meetings">Vos prochains rendez-vous</string>
     <string name="icone_de_fichier">icone de fichier</string>
+    <string name="close_button">close button</string>
+    <string name="meeting_name">Meeting Name</string>
+    <string name="date_de_l_intervention">Date de l\'intervention</string>
+    <string name="random_date">Horaire Random</string>
+    <string name="horaire">Horaire</string>
+    <string name="modele">Modèle</string>
+    <string name="random_modele">Random Modèle</string>
+    <string name="immatriculation">Immatriculation</string>
+    <string name="type_de_rdv">Type de RDV</string>
+    <string name="random_type">Random Type</string>
+    <string name="random_immatriculation">Immatriculation</string>
+    <string name="marque">Marque</string>
+    <string name="random_marque">Random Marque</string>
+    <string name="couleur_de_la_voiture">Couleur</string>
+    <string name="random_couleur">Random Couleur</string>
+    <string name="expertiser_ce_vehicule">Expertiser ce vehicule</string>
+    <string name="plan">Plan</string>
 
 </resources>
