@@ -4,10 +4,8 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.Window
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import space.ava.restiloc.R
 import space.ava.restiloc.classes.Mission
 
@@ -50,11 +48,11 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
 
         // model de vehicule
         val model = findViewById<TextView>(R.id.pop_up_model_detail)
-        model.text = currentMeeting.vehicle.model.brand
+        model.text = currentMeeting.vehicle.model.label
 
         // marque de vehicule
         val brand = findViewById<TextView>(R.id.pop_up_marque_detail)
-        brand.text = currentMeeting.vehicle.model.label
+        brand.text = currentMeeting.vehicle.model.brand
 
 
         // couleur de vehicule
