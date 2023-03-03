@@ -40,7 +40,7 @@ class MeetingAdapter (
         //    .load(currentMeeting.vehicle.route)
         //    .into(holder.meetingImage)
         holder.meetingName?.text = currentMeeting.folder
-        holder.meetingDescription?.text = currentMeeting.dateMission
+        holder.meetingDescription?.text = currentMeeting.startedAt.substring(0, 5)
 
 
 
