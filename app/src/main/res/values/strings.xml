@@ -11,7 +11,7 @@
 
     <!-- Subtitle -->
     <string name="description">Description</string>
-    <string name="informations">Les informations détaillées de votre rendez-vous</string>
+    <string name="informations">Les informations détaillées</string>
 
 
     <string name="meetings">Vos prochains rendez-vous</string>
