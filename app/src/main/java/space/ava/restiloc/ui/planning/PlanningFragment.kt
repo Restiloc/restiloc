@@ -52,7 +52,8 @@ class PlanningFragment(
         // appel asynchrone de l'API
         lifecycleScope.launch {
             try {
-                val missions = apiService.getInfos()
+                val token = "3|HlSXLCunypOAWlGgEckwTjlY0MzDdv8ooqkuEjs1"
+                val missions = apiService.getInfos( "Bearer " + token)
                 for (mission in missions) {
                     planningList.add(mission)
                 }
