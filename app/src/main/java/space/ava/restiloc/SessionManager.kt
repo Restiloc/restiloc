@@ -2,6 +2,7 @@ package space.ava.restiloc
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 
 class SessionManager(context: Context) {
     private val sharedPreferences =
@@ -16,9 +17,14 @@ class SessionManager(context: Context) {
     fun saveAuthToken(token: String) {
         editor.putString(USER_TOKEN, token)
         editor.apply()
+        Log.d(token , "token saved")
     }
+
+// Fetch user token
+
     fun fetchAuthToken(): String? {
         return sharedPreferences.getString(USER_TOKEN, null)
+
     }
 
 

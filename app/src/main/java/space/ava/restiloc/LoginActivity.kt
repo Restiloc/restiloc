@@ -63,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
 
                         if (loginResponse?.status == true) {
                             sessionManager.saveAuthToken(loginResponse.token)
+
                             sessionManager.setLogin(true)
                             // appeler la fonction login()
                             Log.d("LoginActivity", "Login successful: ${loginResponse.token}")

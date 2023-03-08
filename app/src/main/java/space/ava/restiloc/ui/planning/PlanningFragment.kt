@@ -14,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import space.ava.restiloc.ApiInterface
 import space.ava.restiloc.R
+import space.ava.restiloc.SessionManager
 import space.ava.restiloc.classes.*
 import space.ava.restiloc.databinding.FragmentPlanningBinding
 import space.ava.restiloc.ui.adapter.MeetingAdapter
@@ -37,6 +38,7 @@ class PlanningFragment(
         _binding = FragmentPlanningBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        lateinit var sessionManager: SessionManager
 
 
         // recuperer les données de l'API
@@ -52,8 +54,9 @@ class PlanningFragment(
         // appel asynchrone de l'API
         lifecycleScope.launch {
             try {
-                val token = "3|HlSXLCunypOAWlGgEckwTjlY0MzDdv8ooqkuEjs1"
-                val missions = apiService.getInfos( "Bearer " + token)
+                // recuperer le token de l'utilisateur
+                sessionManager = SessionManager(requireContext())
+                val missions = apiService.getInfos( "Bearer ${sessionManager.fetchAuthToken()}")
                 for (mission in missions) {
                     planningList.add(mission)
                 }
