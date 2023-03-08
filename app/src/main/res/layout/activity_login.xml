@@ -6,6 +6,11 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/voiture" />
+
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
