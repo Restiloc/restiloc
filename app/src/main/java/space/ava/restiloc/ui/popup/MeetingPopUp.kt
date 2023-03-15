@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import space.ava.restiloc.R
 import space.ava.restiloc.classes.Mission
 
@@ -22,9 +26,37 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
             android.view.ViewGroup.LayoutParams.MATCH_PARENT,
             android.view.ViewGroup.LayoutParams.MATCH_PARENT
         )
-        setupComponents()
-    }
 
+        setupComponents()
+
+        if (currentMeeting.type == "Garage") {
+            val longitude = currentMeeting.garage.longitude.toDouble()
+            val latitude = currentMeeting.garage.latitude.toDouble()
+            val location = LatLng(latitude, longitude)
+            val titleMap = currentMeeting.garage.name
+
+            setupMap(savedInstanceState, location, titleMap)
+        }
+        else {
+            val longitude = currentMeeting.client.longitude.toDouble()
+            val latitude = currentMeeting.client.latitude.toDouble()
+            val location = LatLng(latitude, longitude)
+            val titleMap = currentMeeting.client.lastName
+
+            setupMap(savedInstanceState, location, titleMap)
+        }
+
+    }
+    private fun setupMap(savedInstanceState: Bundle?, location: LatLng, titleMap: String) {
+    val mapView = findViewById<MapView>(R.id.map_view)
+    mapView.onCreate(savedInstanceState)
+    mapView.getMapAsync { map ->
+        // Ajouter le marker à l'emplacement de l'adresse
+        val markerOptions = MarkerOptions().position(location).title(titleMap)
+        map.addMarker(markerOptions)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16f))
+    }
+}
     private fun setupComponents() {
         // actualiser les données de la popup
         val namePopup = findViewById<TextView>(R.id.pop_up_meeting_detail_title)
@@ -58,6 +90,8 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
         // couleur de vehicule
         val color = findViewById<TextView>(R.id.pop_up_car_color_detail)
         color.text = currentMeeting.vehicle.color
+
+
 
         // close button
         val close = findViewById<ImageView>(R.id.close_button)
