@@ -71,6 +71,9 @@ class LoginActivity : AppCompatActivity() {
 
                         } else {
                             // Error logging in
+                            sessionManager.setLogin(false)
+                            // mettre isLogin à false
+
                             Log.d("LoginActivity", "Error logging in: ${loginResponse?.message}")
                         }
                     }
