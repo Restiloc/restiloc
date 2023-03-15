@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginTop="-106dp"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:background="@color/white"
+        android:src="@drawable/voiture" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        style="@style/TitleTextStyle"
+        android:text="@string/title_welcome"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/DefaultTextStyle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/landing_description"
+        android:textAlignment="center"
+        android:textColor="@color/white_secondary"
+        android:textSize="13dp" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="@drawable/btn_round"
+        android:fontFamily="@font/bold"
+        android:text="@string/login"
+        android:textColor="@color/white_secondary" />
+
+</LinearLayout>
