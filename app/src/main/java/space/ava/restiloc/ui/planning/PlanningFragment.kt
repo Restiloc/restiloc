@@ -33,7 +33,7 @@ class PlanningFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val planningViewModel =
+
             ViewModelProvider(this)[PlanningViewModel::class.java]
         _binding = FragmentPlanningBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -60,7 +60,7 @@ class PlanningFragment(
                 for (mission in missions) {
                     planningList.add(mission)
                 }
-                val verticalRecyclerView = root?.findViewById<RecyclerView>(R.id.vertical_recycler_view)
+                val verticalRecyclerView = root.findViewById<RecyclerView>(R.id.vertical_recycler_view)
                 verticalRecyclerView?.adapter = MeetingAdapter(planningList, R.layout.item_horizontal)
                 verticalRecyclerView?.addItemDecoration(MeetingItemDecoration())
                 Log.d("test", "test")
