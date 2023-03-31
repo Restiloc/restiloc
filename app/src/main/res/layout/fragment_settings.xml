@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/"
+        android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="Se déconnecter"
