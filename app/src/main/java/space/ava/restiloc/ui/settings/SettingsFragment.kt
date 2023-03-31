@@ -9,11 +9,18 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import space.ava.restiloc.ApiInterface
 import space.ava.restiloc.LoginActivity
 import space.ava.restiloc.R
 import space.ava.restiloc.SessionManager
 import space.ava.restiloc.databinding.FragmentSettingsBinding
+import space.ava.restiloc.ui.adapter.MeetingAdapter
+import space.ava.restiloc.ui.adapter.MeetingItemDecoration
 
 class SettingsFragment : Fragment() {
 
@@ -45,12 +52,24 @@ class SettingsFragment : Fragment() {
         }
 
         val logoutButton = root.findViewById<Button>(R.id.logout)
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://restiloc.space")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiInterface::class.java)
 
         logoutButton.setOnClickListener{
+            lifecycleScope.launch {
+                try {
+                    sessionManager = SessionManager(requireContext())
+                    val response = apiService.logout( "Bearer ${sessionManager.fetchAuthToken()}")
+                    Log.d("Response", response.toString())
+                } catch (e: Exception) {
+
+                }
+            }
             sessionManager.setLogin(false)
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
         }
 
         return root

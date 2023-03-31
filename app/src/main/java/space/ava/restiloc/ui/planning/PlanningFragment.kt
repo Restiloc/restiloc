@@ -63,7 +63,7 @@ class PlanningFragment(
                 val verticalRecyclerView = root.findViewById<RecyclerView>(R.id.vertical_recycler_view)
                 verticalRecyclerView?.adapter = MeetingAdapter(planningList, R.layout.item_horizontal)
                 verticalRecyclerView?.addItemDecoration(MeetingItemDecoration())
-                Log.d("test", "test")
+                Log.d("test", missions.toString())
 
             } catch (e: Exception) {
                 // PrintStackTrace pour afficher l'erreur
