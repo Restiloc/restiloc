@@ -12,12 +12,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import space.ava.restiloc.ApiInterface
-import space.ava.restiloc.LoginActivity
-import space.ava.restiloc.R
-import space.ava.restiloc.SessionManager
+import space.ava.restiloc.*
+import space.ava.restiloc.classes.LoginRequest
+import space.ava.restiloc.classes.LoginResponse
+import space.ava.restiloc.classes.LogoutResponse
 import space.ava.restiloc.databinding.FragmentSettingsBinding
 import space.ava.restiloc.ui.adapter.MeetingAdapter
 import space.ava.restiloc.ui.adapter.MeetingItemDecoration
@@ -60,15 +63,25 @@ class SettingsFragment : Fragment() {
         val apiService = retrofit.create(ApiInterface::class.java)
 
         logoutButton.setOnClickListener{
-            lifecycleScope.launch {
-                try {
-                    sessionManager = SessionManager(requireContext())
-                    val response = apiService.logout( "Bearer ${sessionManager.fetchAuthToken()}")
-                    Log.d("Response", response.toString())
-                } catch (e: Exception) {
-
-                }
-            }
+            apiService.logout("Bearer ${sessionManager.fetchAuthToken()}")
+                .enqueue(object : Callback<LogoutResponse> {
+                    override fun onResponse(call: Call<LogoutResponse>, response: Response<LogoutResponse>) {
+                        val logoutResponse = response.body()
+                        Log.d("Logout", logoutResponse.toString())
+                        if (logoutResponse?.status == true) {
+                            sessionManager.setLogin(false)
+                            // Redirection vers la page de login
+                            val intent = Intent(context, LoginActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        } else {
+                            Log.d("LoginActivity", "Error during logout: ${logoutResponse?.message}")
+                        }
+                    }
+                    override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
             sessionManager.setLogin(false)
         }
 
