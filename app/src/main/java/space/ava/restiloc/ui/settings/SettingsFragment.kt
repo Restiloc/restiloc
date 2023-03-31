@@ -75,7 +75,7 @@ class SettingsFragment : Fragment() {
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                         } else {
-                            Log.d("LoginActivity", "Error during logout: ${logoutResponse?.message}")
+                            Log.d("LogoutState", "Error during logout: ${logoutResponse?.message}")
                         }
                     }
                     override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
