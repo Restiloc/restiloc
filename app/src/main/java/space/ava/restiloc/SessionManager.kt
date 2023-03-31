@@ -34,6 +34,9 @@ class SessionManager(context: Context) {
 
     fun setLogin(isLoggedIn: Boolean = false )  {
         editor.putBoolean("isLoggedIn", isLoggedIn)
+        if (!isLoggedIn) {
+            editor.remove(USER_TOKEN)
+        }
         editor.apply()
     }
 }
