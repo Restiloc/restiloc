@@ -48,8 +48,8 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
 
     }
     private fun setupMap(savedInstanceState: Bundle?, location: LatLng, titleMap: String) {
-    val mapView = findViewById<MapView>(R.id.map_view)
-    mapView.onCreate(savedInstanceState)
+     val mapView = findViewById<MapView>(R.id.map_view)
+     mapView.onCreate(savedInstanceState)
     mapView.getMapAsync { map ->
         // Ajouter le marker à l'emplacement de l'adresse
         val markerOptions = MarkerOptions().position(location).title(titleMap)
