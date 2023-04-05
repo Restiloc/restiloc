@@ -24,5 +24,5 @@ interface ApiInterface {
 
     @Headers("Content-Type: application/json")
     @POST("api/unavailabilities")
-    fun postUnavailability(@Header("Authorization") token: String, @Body request: Unavailability): Response<Unavailability>
+    fun postUnavailability(@Header("Authorization") token: String, @Body request: Unavailability): Call<UnavailabilityResponse>
 }
