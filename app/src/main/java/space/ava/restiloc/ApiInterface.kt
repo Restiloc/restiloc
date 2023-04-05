@@ -1,11 +1,9 @@
 package space.ava.restiloc
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
-import space.ava.restiloc.classes.LoginRequest
-import space.ava.restiloc.classes.LoginResponse
-import space.ava.restiloc.classes.LogoutResponse
-import space.ava.restiloc.classes.Mission
+import space.ava.restiloc.classes.*
 
 interface ApiInterface {
     @GET("api/me/missions")
@@ -20,4 +18,11 @@ interface ApiInterface {
     @POST("api/auth/logout")
     fun logout(@Header("Authorization") token: String): Call<LogoutResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("api/reasons")
+    suspend fun getReasons(@Header("Authorization") token: String): List<Reason>
+
+    @Headers("Content-Type: application/json")
+    @POST("api/unavailabilities")
+    fun postUnavailability(@Header("Authorization") token: String, @Body request: Unavailability): Response<Unavailability>
 }
