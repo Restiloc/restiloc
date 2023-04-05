@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import space.ava.restiloc.ApiClient
 import space.ava.restiloc.ApiInterface
 import space.ava.restiloc.R
 import space.ava.restiloc.SessionManager
@@ -41,15 +42,9 @@ class PlanningFragment(
         lateinit var sessionManager: SessionManager
 
 
-        // recuperer les données de l'API
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://restiloc.space/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val apiService = retrofit.create(ApiInterface::class.java)
+        val apiService = ApiClient.apiService
         val planningList = ArrayList<Mission>()
+        val reasonList = ArrayList<Reason>()
 
         // appel asynchrone de l'API
         lifecycleScope.launch {
@@ -57,11 +52,17 @@ class PlanningFragment(
                 // recuperer le token de l'utilisateur
                 sessionManager = SessionManager(requireContext())
                 val missions = apiService.getInfos( "Bearer ${sessionManager.fetchAuthToken()}")
+                val reasons = apiService.getReasons( "Bearer ${sessionManager.fetchAuthToken()}")
+
+                Log.d("test", reasons.toString())
                 for (mission in missions) {
                     planningList.add(mission)
                 }
+                for (reason in reasons) {
+                    reasonList.add(reason)
+                }
                 val verticalRecyclerView = root.findViewById<RecyclerView>(R.id.vertical_recycler_view)
-                verticalRecyclerView?.adapter = MeetingAdapter(planningList, R.layout.item_horizontal)
+                verticalRecyclerView?.adapter = MeetingAdapter(planningList, reasonList, R.layout.item_horizontal)
                 verticalRecyclerView?.addItemDecoration(MeetingItemDecoration())
                 Log.d("test", missions.toString())
 

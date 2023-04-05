@@ -37,20 +37,7 @@ class LoginActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString()
 
 
-            val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
-                })
-                .build()
-
-// Créez un objet Retrofit avec l'encodage JSON et le client OkHttp
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://restiloc.space/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build()
-
-            val apiService = retrofit.create(ApiInterface::class.java)
+            val apiService = ApiClient.apiService
 
             apiService.login(LoginRequest( username = username, password = password))
                 .enqueue(object : Callback<LoginResponse> {
