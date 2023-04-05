@@ -1,26 +1,41 @@
 package space.ava.restiloc.ui.popup
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import space.ava.restiloc.ApiClient
+import space.ava.restiloc.ApiClient.apiService
 import space.ava.restiloc.R
-import space.ava.restiloc.classes.Mission
+import space.ava.restiloc.SessionManager
+import space.ava.restiloc.classes.*
 
-class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeting: Mission) : Dialog(
+
+class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeting: Mission, private val reasonsList: List<Reason>) : Dialog(
     meetingAdapter
 ) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle? ) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.popup_meeting_detail)
+
         // mettre a la taille de l'écran
         window?.setLayout(
             android.view.ViewGroup.LayoutParams.MATCH_PARENT,
@@ -28,7 +43,7 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
         )
 
         setupComponents()
-
+        // Regarde si la mission est un garage ou un client
         if (currentMeeting.type == "Garage") {
             val longitude = currentMeeting.garage.longitude.toDouble()
             val latitude = currentMeeting.garage.latitude.toDouble()
@@ -46,7 +61,79 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
             setupMap(savedInstanceState, location, titleMap)
         }
 
+        // J'appuie sur le bouton "Indisponibilité"
+        val unavaibilityButton = findViewById<Button>(R.id.buttonUnavaibility)
+        unavaibilityButton.setOnClickListener {
+            val builder = AlertDialog.Builder(meetingAdapter)
+            builder.setTitle("Indisponibilité du véhicule")
+
+            // vérifier si la liste des raisons est vide
+            if (reasonsList.isNotEmpty()) {
+                // convertir la liste de raisons en tableau de chaînes
+                val reasons = reasonsList.map { it.label }.toTypedArray()
+                var selectedReason = 0
+
+
+                val checkBox = CheckBox(context)
+                checkBox.text = "Client a annulé"
+                val layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+
+                val margin = meetingAdapter.resources.getDimensionPixelSize(R.dimen.marginXL)
+                layoutParams.setMargins(margin, margin, margin, margin)
+                checkBox.layoutParams = layoutParams
+                builder.setView(checkBox)
+
+                builder.setSingleChoiceItems(reasons, selectedReason) { dialog, which ->
+                    // mettre à jour la raison sélectionnée
+                    selectedReason = which
+                }
+
+                builder.setPositiveButton("OK") { dialog, which ->
+                    // récupérer la raison sélectionnée
+                    val selectedReasonText = reasonsList[selectedReason].label
+                    // récupérer la valeur de la checkbox
+                    val clientCanceled = checkBox.isChecked
+
+                    val sessionManager = SessionManager(meetingAdapter)
+
+                    val unavailability = Unavailability(
+                        reason_id = reasonsList[selectedReason].id, // récupérer l'id de la raison sélectionné
+                        mission_id = currentMeeting.id, // récupérer l'id de la réunion actuelle
+                        customerResponsible = clientCanceled, // récupérer la valeur de la checkbox
+                    )
+                    val apiService = ApiClient.apiService
+
+                    apiService.postUnavailability("Bearer ${sessionManager.fetchAuthToken()}", unavailability)
+                        .enqueue(object : Callback<UnavailabilityResponse> {
+                            override fun onFailure(call: Call<UnavailabilityResponse>, t: Throwable) {
+                                Toast.makeText(meetingAdapter, "Impossible d'envoyer les données", Toast.LENGTH_SHORT).show()
+                            }
+
+                            override fun onResponse(call: Call<UnavailabilityResponse>, response: Response<UnavailabilityResponse>) {
+                                // si $clientCanceled est true écrire oui sinon non
+                                Toast.makeText(meetingAdapter, "Raison envoyée : $selectedReasonText, Annulé par le client : $clientCanceled ", Toast.LENGTH_SHORT).show()
+
+                            }
+                        })
+                }
+                builder.setNegativeButton("Annuler", null)
+                val dialog = builder.create()
+                dialog.show()
+            } else {
+                // afficher un message d'erreur si la liste des raisons est vide
+                Toast.makeText(meetingAdapter, "Impossible de récupérer les raisons d'indisponibilité", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+
     }
+
+
+
     private fun setupMap(savedInstanceState: Bundle?, location: LatLng, titleMap: String) {
      val mapView = findViewById<MapView>(R.id.map_view)
      mapView.onCreate(savedInstanceState)
@@ -99,4 +186,5 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
             dismiss()
         }
     }
+    
 }
