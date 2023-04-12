@@ -21,8 +21,8 @@ import space.ava.restiloc.ui.adapter.MeetingAdapter
 import space.ava.restiloc.ui.adapter.MeetingItemDecoration
 
 
-class PlanningFragment(
-) : Fragment() {
+class PlanningFragment() : Fragment() {
+
 
     private var _binding: FragmentPlanningBinding? = null
 
@@ -45,6 +45,7 @@ class PlanningFragment(
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://restiloc.space/")
+            //.baseUrl("http://127.0.0.1:8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -61,7 +62,7 @@ class PlanningFragment(
                     planningList.add(mission)
                 }
                 val verticalRecyclerView = root.findViewById<RecyclerView>(R.id.vertical_recycler_view)
-                verticalRecyclerView?.adapter = MeetingAdapter(planningList, R.layout.item_horizontal)
+                verticalRecyclerView?.adapter = MeetingAdapter(planningList, R.layout.item_horizontal_folder)
                 verticalRecyclerView?.addItemDecoration(MeetingItemDecoration())
                 Log.d("test", "test")
 
