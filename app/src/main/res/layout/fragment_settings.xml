@@ -15,9 +15,20 @@
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Se déconnecter"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="631dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
