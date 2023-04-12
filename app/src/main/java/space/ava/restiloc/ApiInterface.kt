@@ -18,6 +18,16 @@ interface ApiInterface {
     @POST("api/auth/logout")
     fun logout(@Header("Authorization") token: String): Call<LogoutResponse>
 
+    @GET("api/me")
+    fun getCurrentExpert(@Header("Authorization") token: String): Call<Expert>
+
+    @PUT("api/experts/{id}")
+    fun updateExpert(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body updateRequest: UpdateRequest
+    ): Call<UpdateResponse>
+
     @Headers("Content-Type: application/json")
     @GET("api/reasons")
     suspend fun getReasons(@Header("Authorization") token: String): List<Reason>
