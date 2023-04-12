@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -53,6 +54,7 @@ class LoginActivity : AppCompatActivity() {
 
                             sessionManager.setLogin(true)
                             // appeler la fonction login()
+                            Toast.makeText(this@LoginActivity, "Bonjour", Toast.LENGTH_SHORT).show()
                             Log.d("LoginActivity", "Login successful: ${loginResponse.token}")
                             continuetoMainActivity()
 
@@ -60,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                             // Error logging in
                             sessionManager.setLogin(false)
                             // mettre isLogin à false
-
+                            Toast.makeText(this@LoginActivity, "Erreur de connexion", Toast.LENGTH_SHORT).show()
                             Log.d("LoginActivity", "Error logging in: ${loginResponse?.message}")
                         }
                     }
