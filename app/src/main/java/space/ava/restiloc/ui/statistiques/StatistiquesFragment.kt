@@ -43,8 +43,6 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
     var firstYear = 0
 
     var saveFirstDay = 0
-    var saveFirstMonth = 0
-    var saveFirstYear = 0
 
     var firstCompletedDate : String = ""
 
@@ -54,8 +52,6 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
     var secondYear = 0
 
     var saveSecondDay = 0
-    var saveSecondMonth = 0
-    var saveSecondYear = 0
 
     var secondCompletedDate : String = ""
 
@@ -116,7 +112,7 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
                 val verticalRecyclerView = root.findViewById<RecyclerView>(R.id.vertical_recycler_view_stats)
                 verticalRecyclerView?.adapter = StatsAdapter(statsList, R.layout.item_horizontal_stats)
                 verticalRecyclerView?.addItemDecoration(StatsItemDecoration())
-                Log.d("test", "test")
+                Log.d("test", view.toString())
 
                 // Si je suis en erreur
             } catch (e: Exception) {
@@ -153,7 +149,8 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
 
     private fun getStats() {
         // Vérifier si les deux dates ont été sélectionnées
-        if (saveFirstDay == 0 || saveSecondDay == 0) {
+        if (firstDay == 0 || secondDay == 0) {
+            Log.d("test", firstDay.toString())
             Toast.makeText(requireContext(), "Veuillez sélectionner deux dates", Toast.LENGTH_SHORT).show()
             return
         }
@@ -182,7 +179,21 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
                 firstCompletedDate,
                 secondCompletedDate
             )
-        Log.d("stats", stats.toString())
+        Log.d("finalStats", stats.toString())
+            // mettre à jour la liste de statistiques avec les données récupérées
+            statsList.clear()
+            statsList.addAll(stats)
+            Log.d("finalStats", statsList.toString())
+            // faire quelque chose avec statsList, par exemple l'afficher dans une RecyclerView
+
+            val root: View = binding.root
+
+            // Recuperation du Recycler view
+            val verticalRecyclerView = root.findViewById<RecyclerView>(R.id.vertical_recycler_view_stats)
+            verticalRecyclerView?.adapter = StatsAdapter(statsList, R.layout.item_horizontal_stats)
+            verticalRecyclerView?.addItemDecoration(StatsItemDecoration())
+            Log.d("test", view.toString())
+
         }
     }
 
@@ -193,17 +204,18 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
         firstMonth = cal.get(Calendar.MONTH)
         firstDay = cal.get(Calendar.DAY_OF_MONTH)
 
-        val date = cal.time
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         formatter.timeZone = TimeZone.getTimeZone("UTC")
-        firstCompletedDate = formatter.format(date)
+        val date = formatter.format(cal.time)
+        firstCompletedDate = date
+
+        Log.d("firstCompletedDate", firstCompletedDate)
     }
 
 
     private fun pickDateFirst() {
         // Find the datePickerButton in the layout
         firstBtn = requireView().findViewById(R.id.firstDatePickerButton)
-
 
         firstBtn.setOnClickListener {
             datePickerSelected = 1
@@ -219,10 +231,10 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
         secondMonth = cal.get(Calendar.MONTH)
         secondDay = cal.get(Calendar.DAY_OF_MONTH)
 
-        val date = cal.time
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         formatter.timeZone = TimeZone.getTimeZone("UTC")
-        secondCompletedDate = formatter.format(date)
+        val date = formatter.format(cal.time)
+        secondCompletedDate = date
     }
 
     private fun pickDateSecond() {
@@ -242,25 +254,43 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
         if (datePickerSelected == 1) {
             firstDate = requireView().findViewById(R.id.dateOne)
 
-            saveFirstDay = dayOfMonth
-            saveFirstMonth = month+1
-            saveFirstYear = year
+            firstDay = dayOfMonth
+            firstMonth = month + 1
+            firstYear = year
 
-            getDateTimeCalendarFirst()
+            // Formatter la date dans le format souhaité
+            val date1 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth)
+            val dateFormatted = date1.format(calendar.time)
 
-            firstDate.text = "$saveFirstDay/$saveFirstMonth/$saveFirstYear"
+            // Mise à jour de la variable firstCompletedDate avec la date formatée
+            firstCompletedDate = dateFormatted
 
-            Log.d("pickDateFirst()", view.toString())
+            // Mettre à jour le TextView avec la date formatée
+            firstDate.text = "$firstDay/$firstMonth/$firstYear"
+
+            Log.d("firstCompletedDate", view.toString())
         } else if (datePickerSelected == 2) {
             secondDate = requireView().findViewById(R.id.dateTwo)
 
-            saveSecondDay = dayOfMonth
-            saveSecondMonth = month+1
-            saveSecondYear = year
+            secondDay = dayOfMonth
+            secondMonth = month+1
+            secondYear = year
 
-            getDateTimeCalendarSecond()
+            // Formatter la date dans le format souhaité
+            val date2 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth)
+            val dateFormatted = date2.format(calendar.time)
 
-            secondDate.text = "$saveSecondDay/$saveSecondMonth/$saveSecondYear"
+            // Mise à jour de la variable firstCompletedDate avec la date formatée
+            secondCompletedDate = dateFormatted
+
+            // Mettre à jour le TextView avec la date formatée
+            secondDate.text = "$secondDay/$secondMonth/$secondYear"
+
+            Log.d("secondCompletedDate", view.toString())
         }
     }
 
