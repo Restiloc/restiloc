@@ -20,4 +20,9 @@ interface ApiInterface {
     @GET("api/stats")
     // récupération de la route des statistiques
     suspend fun getStats(@Header("Authorization") token: String): List<Stats>
+
+    @GET("api/stats?startDate={startDate}&endDate={endDate}")
+    // récupération de la route des statistiques
+    suspend fun getStatsBetweenDates(@Header("Authorization") token: String, startDate : String, endDate : String): List<Stats>
+
 }

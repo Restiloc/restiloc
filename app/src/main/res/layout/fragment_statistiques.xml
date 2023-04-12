@@ -93,6 +93,15 @@ tools:context=".ui.statistiques.StatistiquesFragment">
         </LinearLayout>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/getStatsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:text="@string/get_stats" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vertical_recycler_view_stats"
         android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package space.ava.restiloc.ui.statistiques
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -24,11 +27,15 @@ import space.ava.restiloc.classes.Stats
 import space.ava.restiloc.databinding.FragmentStatistiquesBinding
 import space.ava.restiloc.ui.adapter.StatsAdapter
 import space.ava.restiloc.ui.adapter.StatsItemDecoration
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
+
+    // Variables pour la date
+    private var datePickerSelected : Int = 0
 
     // Variables pour la première date
     var firstDay = 0
@@ -39,6 +46,8 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
     var saveFirstMonth = 0
     var saveFirstYear = 0
 
+    var firstCompletedDate : String = ""
+
     // Variables pour la deuxième date
     var secondDay = 0
     var secondMonth = 0
@@ -47,6 +56,8 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
     var saveSecondDay = 0
     var saveSecondMonth = 0
     var saveSecondYear = 0
+
+    var secondCompletedDate : String = ""
 
     // Cherche les dates dans le layout
     private lateinit var firstDate : TextView
@@ -127,13 +138,65 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
         pickDateFirst()
 
         pickDateSecond()
+
+              // Récupération du bouton "Get stats"
+              val getStatsButton = view.findViewById<Button>(R.id.getStatsButton)
+
+
+              // Ajout d'un listener pour écouter les clics
+              getStatsButton.setOnClickListener {
+                  // Appeler la méthode pour récupérer les statistiques
+                  getStats()
+              }
+
     }
+
+    private fun getStats() {
+        // Vérifier si les deux dates ont été sélectionnées
+        if (saveFirstDay == 0 || saveSecondDay == 0) {
+            Toast.makeText(requireContext(), "Veuillez sélectionner deux dates", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Appel à la session
+        lateinit var sessionManager: SessionManager
+
+        // recuperer les données de l'API
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://restiloc.space/")
+            //.baseUrl("http://127.0.0.1:8000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiInterface::class.java)
+        val statsList = ArrayList<Stats>()
+
+        // appel asynchrone de l'API
+        lifecycleScope.launch {
+            // recuperer le token de l'utilisateur
+            sessionManager = SessionManager(requireContext())
+            // recuperer les infos dans getStats()
+            val stats = apiService.getStatsBetweenDates(
+                "Bearer ${sessionManager.fetchAuthToken()}",
+                firstCompletedDate,
+                secondCompletedDate
+            )
+        Log.d("stats", stats.toString())
+        }
+    }
+
 
     private fun getDateTimeCalendarFirst() {
         val cal : Calendar = Calendar.getInstance()
         firstYear = cal.get(Calendar.YEAR)
         firstMonth = cal.get(Calendar.MONTH)
         firstDay = cal.get(Calendar.DAY_OF_MONTH)
+
+        val date = cal.time
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+        firstCompletedDate = formatter.format(date)
     }
 
 
@@ -141,10 +204,13 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
         // Find the datePickerButton in the layout
         firstBtn = requireView().findViewById(R.id.firstDatePickerButton)
 
+
         firstBtn.setOnClickListener {
+            datePickerSelected = 1
             getDateTimeCalendarFirst()
             DatePickerDialog(requireContext(), this, firstYear, firstMonth, firstDay).show()
         }
+
     }
 
     private fun getDateTimeCalendarSecond() {
@@ -152,6 +218,11 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
         secondYear = cal.get(Calendar.YEAR)
         secondMonth = cal.get(Calendar.MONTH)
         secondDay = cal.get(Calendar.DAY_OF_MONTH)
+
+        val date = cal.time
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+        secondCompletedDate = formatter.format(date)
     }
 
     private fun pickDateSecond() {
@@ -160,6 +231,7 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
         secondBtn = requireView().findViewById(R.id.secondDatePickerButton)
 
         secondBtn.setOnClickListener {
+            datePickerSelected = 2
             getDateTimeCalendarSecond()
             DatePickerDialog(requireContext(), this, secondYear, secondMonth, secondDay).show()
         }
@@ -167,27 +239,29 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         // Find the text for the first date in the layout
-        firstDate = requireView().findViewById(R.id.dateOne)
+        if (datePickerSelected == 1) {
+            firstDate = requireView().findViewById(R.id.dateOne)
 
-        saveFirstDay = dayOfMonth
-        saveFirstMonth = month
-        saveFirstYear = year
+            saveFirstDay = dayOfMonth
+            saveFirstMonth = month+1
+            saveFirstYear = year
 
-        getDateTimeCalendarFirst()
+            getDateTimeCalendarFirst()
 
-        firstDate.text = "$saveFirstDay/$saveFirstMonth/$saveFirstYear"
+            firstDate.text = "$saveFirstDay/$saveFirstMonth/$saveFirstYear"
 
-        // Find the text for the second date in the layout
-        secondDate = requireView().findViewById(R.id.dateTwo)
+            Log.d("pickDateFirst()", view.toString())
+        } else if (datePickerSelected == 2) {
+            secondDate = requireView().findViewById(R.id.dateTwo)
 
-        saveSecondDay = dayOfMonth
-        saveSecondMonth = month
-        saveSecondYear = year
+            saveSecondDay = dayOfMonth
+            saveSecondMonth = month+1
+            saveSecondYear = year
 
-        getDateTimeCalendarSecond()
+            getDateTimeCalendarSecond()
 
-        secondDate.text = "$saveSecondDay/$saveSecondMonth/$saveSecondYear"
-
+            secondDate.text = "$saveSecondDay/$saveSecondMonth/$saveSecondYear"
+        }
     }
 
  }
