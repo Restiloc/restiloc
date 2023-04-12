@@ -14,6 +14,6 @@ data class UpdateRequest(
     val email: String,
 
     @SerializedName("phoneNumber")
-    val phoneNumber: String,
+    val phoneNumber: Int,
 
 )

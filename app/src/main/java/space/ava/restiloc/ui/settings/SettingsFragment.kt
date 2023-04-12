@@ -9,9 +9,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,8 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import space.ava.restiloc.*
 import space.ava.restiloc.classes.*
 import space.ava.restiloc.databinding.FragmentSettingsBinding
-import space.ava.restiloc.ui.adapter.MeetingAdapter
-import space.ava.restiloc.ui.adapter.MeetingItemDecoration
 
 class SettingsFragment : Fragment() {
 
@@ -86,11 +81,11 @@ class SettingsFragment : Fragment() {
                 root.findViewById<TextView>(R.id.settings_name).text.toString(),
                 root.findViewById<TextView>(R.id.settings_firstname).text.toString(),
                 root.findViewById<TextView>(R.id.settings_email).text.toString(),
-                root.findViewById<TextView>(R.id.settings_tel).text.toString()
+                Integer.parseInt(root.findViewById<TextView>(R.id.settings_tel).text.toString())
             )
             Log.d("Profile", expert.id.toString())
             Log.d("Profile", updateRequest.toString());
-            apiService.updateExpert("Bearer ${sessionManager.fetchAuthToken()}", updateRequest, expert.id)
+            apiService.updateExpert("Bearer ${sessionManager.fetchAuthToken()}", updateRequest)
                 .enqueue(object : Callback<UpdateResponse> {
                     override fun onResponse(call: Call<UpdateResponse>, response: Response<UpdateResponse>) {
                         val updateResponse = response.body()

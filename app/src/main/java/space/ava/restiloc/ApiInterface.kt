@@ -1,6 +1,5 @@
 package space.ava.restiloc
 
-import android.util.Log
 import retrofit2.Call
 import retrofit2.http.*
 import space.ava.restiloc.classes.*
@@ -21,11 +20,13 @@ interface ApiInterface {
     @GET("api/me")
     fun getCurrentExpert(@Header("Authorization") token: String): Call<Expert>
 
-    @Headers("Content-Type: application/json")
-    @PUT("api/expert/{id}")
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json"
+    )
+    @PUT("api/expert/3")
     fun updateExpert(
         @Header("Authorization") token: String,
-        @Body updateRequest: UpdateRequest,
-        @Path("id") id: Int
+        @Body updateRequest: UpdateRequest
     ): Call<UpdateResponse>
 }
