@@ -20,13 +20,10 @@ interface ApiInterface {
     @GET("api/me")
     fun getCurrentExpert(@Header("Authorization") token: String): Call<Expert>
 
-    @Headers(
-        "Accept: application/json",
-        "Content-Type: application/json"
-    )
-    @PUT("api/expert/3")
+    @PUT("api/experts/{id}")
     fun updateExpert(
         @Header("Authorization") token: String,
+        @Path("id") id: String,
         @Body updateRequest: UpdateRequest
     ): Call<UpdateResponse>
 }

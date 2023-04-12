@@ -85,16 +85,19 @@ class SettingsFragment : Fragment() {
             )
             Log.d("Profile", expert.id.toString())
             Log.d("Profile", updateRequest.toString());
-            apiService.updateExpert("Bearer ${sessionManager.fetchAuthToken()}", updateRequest)
-                .enqueue(object : Callback<UpdateResponse> {
-                    override fun onResponse(call: Call<UpdateResponse>, response: Response<UpdateResponse>) {
-                        val updateResponse = response.body()
-                        Log.d("Profile", "Update response : ${updateResponse.toString()}")
-                    }
-                    override fun onFailure(call: Call<UpdateResponse>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-                })
+            apiService.updateExpert(
+                token = "Bearer ${sessionManager.fetchAuthToken()}",
+                id = expert.id.toString(),
+                updateRequest = updateRequest
+            ).enqueue(object : Callback<UpdateResponse> {
+                override fun onResponse(call: Call<UpdateResponse>, response: Response<UpdateResponse>) {
+                    val updateResponse = response.body()
+                    Log.d("Profile", "Update response : ${updateResponse.toString()}")
+                }
+                override fun onFailure(call: Call<UpdateResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
         }
 
         val logoutButton = root.findViewById<Button>(R.id.logout)
