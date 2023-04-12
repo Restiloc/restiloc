@@ -1,6 +1,5 @@
 package space.ava.restiloc.classes
 
-
 class Client (
     val id: Int,
     val lastName: String,
