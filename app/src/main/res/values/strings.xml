@@ -17,6 +17,8 @@
 
 
     <string name="meetings">Vos prochains rendez-vous</string>
+    <string name="statistiques">Les statistiques</string>
+    <string name="stats_between_dates">Statistiques entre deux dates</string>
     <string name="icone_de_fichier">icone de fichier</string>
     <string name="close_button">close button</string>
     <string name="meeting_name">Meeting Name</string>
@@ -36,6 +38,8 @@
     <string name="expertiser_ce_vehicule">Expertiser ce vehicule</string>
     <string name="plan">Plan</string>
     <string name="login">Login</string>
+    <string name="choose_date">Choisir la date</string>
+    <string name="date">Date</string>
 
 
 </resources>
