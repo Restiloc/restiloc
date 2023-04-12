@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin"
         android:hint="Téléphone"
-        android:inputType="text"
+        android:inputType="phone"
         app:layout_constraintTop_toBottomOf="@+id/settings_email"
 
         tools:ignore="HardcodedText"
