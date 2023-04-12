@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import retrofit2.Call
@@ -84,7 +85,6 @@ class SettingsFragment : Fragment() {
                 Integer.parseInt(root.findViewById<TextView>(R.id.settings_tel).text.toString())
             )
             Log.d("Profile", expert.id.toString())
-            Log.d("Profile", updateRequest.toString());
             apiService.updateExpert(
                 token = "Bearer ${sessionManager.fetchAuthToken()}",
                 id = expert.id.toString(),
@@ -92,10 +92,11 @@ class SettingsFragment : Fragment() {
             ).enqueue(object : Callback<UpdateResponse> {
                 override fun onResponse(call: Call<UpdateResponse>, response: Response<UpdateResponse>) {
                     val updateResponse = response.body()
+                    Toast.makeText(context, "Vos informations ont bien été mises à jour", Toast.LENGTH_SHORT).show()
                     Log.d("Profile", "Update response : ${updateResponse.toString()}")
                 }
                 override fun onFailure(call: Call<UpdateResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(context, "Une erreur est survenue", Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -114,12 +115,15 @@ class SettingsFragment : Fragment() {
                             val intent = Intent(context, LoginActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
+                            Toast.makeText(context, "Vous avez bien été déconnecté", Toast.LENGTH_SHORT).show()
                         } else {
+                            Toast.makeText(context, "Une erreur est survenue", Toast.LENGTH_SHORT).show()
                             Log.d("LogoutActivity", "Error during logout: ${logoutResponse?.message}")
                         }
                     }
                     override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
-                        TODO("Not yet implemented")
+                        Toast.makeText(context, "Une erreur est survenue", Toast.LENGTH_SHORT).show()
+                        Log.d("LogoutActivity", "Error during logout: ${t.message}")
                     }
                 })
             sessionManager.setLogin(false)
