@@ -4,19 +4,12 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import android.widget.*
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -81,7 +74,7 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
 
-                val margin = meetingAdapter.resources.getDimensionPixelSize(R.dimen.marginXL)
+                val margin = meetingAdapter.resources.getDimensionPixelSize(R.dimen.default_margin)
                 layoutParams.setMargins(margin, margin, margin, margin)
                 checkBox.layoutParams = layoutParams
                 builder.setView(checkBox)
