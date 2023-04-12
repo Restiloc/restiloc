@@ -19,6 +19,7 @@ import space.ava.restiloc.*
 import space.ava.restiloc.classes.*
 import space.ava.restiloc.databinding.FragmentSettingsBinding
 
+
 class SettingsFragment : Fragment() {
 
     private lateinit var sessionManager: SessionManager
@@ -48,12 +49,9 @@ class SettingsFragment : Fragment() {
             textView.text = it
         }
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://restiloc.space")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val apiService = retrofit.create(ApiInterface::class.java)
+
+        val apiService = ApiClient.apiService
         var expert: Expert = Expert(0, "", "", "", "", "", "");
 
         apiService.getCurrentExpert("Bearer ${sessionManager.fetchAuthToken()}").enqueue(object : Callback<Expert> {
@@ -77,14 +75,15 @@ class SettingsFragment : Fragment() {
 
         val editButton = root.findViewById<Button>(R.id.settings_save)
 
+
         editButton.setOnClickListener{
             val updateRequest = UpdateRequest(
                 root.findViewById<TextView>(R.id.settings_name).text.toString(),
                 root.findViewById<TextView>(R.id.settings_firstname).text.toString(),
                 root.findViewById<TextView>(R.id.settings_email).text.toString(),
-                Integer.parseInt(root.findViewById<TextView>(R.id.settings_tel).text.toString())
+                root.findViewById<TextView>(R.id.settings_tel).text.toString()
             )
-            Log.d("Profile", expert.id.toString())
+            Log.d("Profile", updateRequest.toString())
             apiService.updateExpert(
                 token = "Bearer ${sessionManager.fetchAuthToken()}",
                 id = expert.id.toString(),
@@ -93,7 +92,7 @@ class SettingsFragment : Fragment() {
                 override fun onResponse(call: Call<UpdateResponse>, response: Response<UpdateResponse>) {
                     val updateResponse = response.body()
                     Toast.makeText(context, "Vos informations ont bien été mises à jour", Toast.LENGTH_SHORT).show()
-                    Log.d("Profile", "Update response : ${updateResponse.toString()}")
+                    Log.d("Profile", "Update response : ${updateResponse.toString()} ${updateRequest.toString()}")
                 }
                 override fun onFailure(call: Call<UpdateResponse>, t: Throwable) {
                     Toast.makeText(context, "Une erreur est survenue", Toast.LENGTH_SHORT).show()
