@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
 object ApiClient {
-    public const val BASE_URL = "https://restiloc.space/"
+    private const val BASE_URL = "https://restiloc.space/"
 
     private val gson : Gson = GsonBuilder()
         .setLenient()

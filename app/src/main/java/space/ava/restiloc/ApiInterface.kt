@@ -1,6 +1,7 @@
 package space.ava.restiloc
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 import space.ava.restiloc.classes.*
 
@@ -26,4 +27,12 @@ interface ApiInterface {
         @Path("id") id: String,
         @Body updateRequest: UpdateRequest
     ): Call<UpdateResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("api/reasons")
+    suspend fun getReasons(@Header("Authorization") token: String): List<Reason>
+
+    @Headers("Content-Type: application/json")
+    @POST("api/unavailabilities")
+    fun postUnavailability(@Header("Authorization") token: String, @Body request: Unavailability): Call<UnavailabilityResponse>
 }

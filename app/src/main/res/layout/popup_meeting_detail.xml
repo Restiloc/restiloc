@@ -202,7 +202,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="30dp"
         android:text="@string/expertiser_ce_vehicule"
-        app:cornerRadius="8dp"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_car_color" />
@@ -211,7 +211,7 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map_view"
-        android:layout_width="150dp"
+        android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -219,5 +219,16 @@
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:liteMode="true"
         />
+
+    <Button
+        android:id="@+id/buttonUnavaibility"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="30dp"
+        android:text="vehicule indisponible"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
