@@ -42,16 +42,12 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
     var firstMonth = 0
     var firstYear = 0
 
-    var saveFirstDay = 0
-
     var firstCompletedDate : String = ""
 
     // Variables pour la deuxième date
     var secondDay = 0
     var secondMonth = 0
     var secondYear = 0
-
-    var saveSecondDay = 0
 
     var secondCompletedDate : String = ""
 
@@ -120,6 +116,7 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
                 e.printStackTrace()
                 // verifie dans quel condition je suis
                 Log.d("test", "testError")
+                Toast.makeText(requireContext(), "Une erreur s'est produite, veuillez réessayer.", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -135,16 +132,19 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
 
         pickDateSecond()
 
-              // Récupération du bouton "Get stats"
-              val getStatsButton = view.findViewById<Button>(R.id.getStatsButton)
+        // Récupération du bouton "Get stats"
+        val getStatsButton = view.findViewById<Button>(R.id.getStatsButton)
 
 
-              // Ajout d'un listener pour écouter les clics
-              getStatsButton.setOnClickListener {
-                  // Appeler la méthode pour récupérer les statistiques
-                  getStats()
-              }
+        // Ajout d'un listener pour écouter les clics
+        getStatsButton.setOnClickListener {
 
+            // Appeler la méthode pour récupérer les statistiques
+
+            getStats()
+
+            Log.d("test", "testError")
+        }
     }
 
     private fun getStats() {
@@ -152,6 +152,21 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
         if (firstDay == 0 || secondDay == 0) {
             Log.d("test", firstDay.toString())
             Toast.makeText(requireContext(), "Veuillez sélectionner deux dates", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Afficher le message d'erreur lorsque la première date est supérieure à la deuxième date
+        if (firstCompletedDate.compareTo(secondCompletedDate) > 0) {
+            Toast.makeText(requireContext(), "La première date doit être inférieure à la deuxième date", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Afficher message d'erreur lorsque les dates ne renvoyent pas de données
+
+
+        // Afficher message d'erreur lorsque les dates sont égales
+        if (firstCompletedDate == secondCompletedDate) {
+            Toast.makeText(requireContext(), "Les dates doivent être différentes", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -183,6 +198,12 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
             // mettre à jour la liste de statistiques avec les données récupérées
             statsList.clear()
             statsList.addAll(stats)
+            if ( statsList.isEmpty() ) {
+                Toast.makeText(requireContext(), "Aucune donnée disponible pour ces dates", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Données récupérées", Toast.LENGTH_SHORT).show()
+            }
+
             Log.d("finalStats", statsList.toString())
             // faire quelque chose avec statsList, par exemple l'afficher dans une RecyclerView
 
