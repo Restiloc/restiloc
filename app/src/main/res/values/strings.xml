@@ -8,13 +8,17 @@
     <string name="title_planning">Planning</string>
     <string name="title_setting">Settings</string>
     <string name="title_stat">Statistiques</string>
+    <string name="title_welcome">Welcome in Restiloc !</string>
 
     <!-- Subtitle -->
     <string name="description">Description</string>
     <string name="informations">Les informations détaillées</string>
+    <string name="landing_description">L\'application qui vous permettra d\'effectuer vos expertises.</string>
 
 
     <string name="meetings">Vos prochains rendez-vous</string>
+    <string name="statistiques">Les statistiques</string>
+    <string name="stats_between_dates">Statistiques entre deux dates</string>
     <string name="icone_de_fichier">icone de fichier</string>
     <string name="close_button">close button</string>
     <string name="meeting_name">Meeting Name</string>
@@ -33,5 +37,10 @@
     <string name="random_couleur">Random Couleur</string>
     <string name="expertiser_ce_vehicule">Expertiser ce vehicule</string>
     <string name="plan">Plan</string>
+    <string name="login">Login</string>
+    <string name="choose_date">Choisir la date</string>
+    <string name="get_stats">Obtenir les stats</string>
+    <string name="date">Date</string>
+
 
 </resources>

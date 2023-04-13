@@ -22,8 +22,8 @@ import space.ava.restiloc.ui.adapter.MeetingAdapter
 import space.ava.restiloc.ui.adapter.MeetingItemDecoration
 
 
-class PlanningFragment(
-) : Fragment() {
+class PlanningFragment() : Fragment() {
+
 
     private var _binding: FragmentPlanningBinding? = null
 
@@ -42,7 +42,9 @@ class PlanningFragment(
         lateinit var sessionManager: SessionManager
 
 
+
         val apiService = ApiClient.apiService
+
         val planningList = ArrayList<Mission>()
         val reasonList = ArrayList<Reason>()
 
@@ -62,7 +64,9 @@ class PlanningFragment(
                     reasonList.add(reason)
                 }
                 val verticalRecyclerView = root.findViewById<RecyclerView>(R.id.vertical_recycler_view)
-                verticalRecyclerView?.adapter = MeetingAdapter(planningList, reasonList, R.layout.item_horizontal)
+
+                verticalRecyclerView?.adapter = MeetingAdapter(planningList, reasonList, R.layout.item_horizontal_folder)
+
                 verticalRecyclerView?.addItemDecoration(MeetingItemDecoration())
                 Log.d("test", missions.toString())
 
@@ -82,5 +86,3 @@ class PlanningFragment(
         _binding = null
     }
 }
-
-

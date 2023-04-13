@@ -22,6 +22,7 @@ class SettingsFragment : Fragment() {
 
     private lateinit var sessionManager: SessionManager
 
+
     private var _binding: FragmentSettingsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -47,12 +48,15 @@ class SettingsFragment : Fragment() {
             textView.text = it
         }
 
+        val logoutButton = root.findViewById<Button>(R.id.logout)
+
         val retrofit = Retrofit.Builder()
             .baseUrl("https://restiloc.space")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val apiService = retrofit.create(ApiInterface::class.java)
+
         var expert: Expert = Expert(0, "", "", "", "", "", "");
 
         try {
@@ -109,11 +113,13 @@ class SettingsFragment : Fragment() {
 
         logoutButton.setOnClickListener{
             Log.d("Logout", "Logout button clicked")
+
             apiService.logout("Bearer ${sessionManager.fetchAuthToken()}")
                 .enqueue(object : Callback<LogoutResponse> {
                     override fun onResponse(call: Call<LogoutResponse>, response: Response<LogoutResponse>) {
                         val logoutResponse = response.body()
                         Log.d("Logout", logoutResponse.toString())
+
                         sessionManager.setLogin(false)
                         // Redirection vers la page de login
                         val intent = Intent(context, LoginActivity::class.java)
@@ -127,6 +133,7 @@ class SettingsFragment : Fragment() {
                         val intent = Intent(context, LoginActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
+
                     }
                 })
             sessionManager.setLogin(false)

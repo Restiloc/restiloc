@@ -40,10 +40,12 @@ class LoginActivity : AppCompatActivity() {
 
             val apiService = ApiClient.apiService
 
+
             apiService.login(LoginRequest( username = username, password = password))
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                         // Error logging in
+                        Toast.makeText(this@LoginActivity, "Une erreur s'est produite, veuillez réessayer.", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
@@ -61,8 +63,11 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             // Error logging in
                             sessionManager.setLogin(false)
+
                             // mettre isLogin à false
-                            Toast.makeText(this@LoginActivity, "Erreur de connexion", Toast.LENGTH_SHORT).show()
+
+                            Toast.makeText(this@LoginActivity, "Les identifiants ne sont pas corrects", Toast.LENGTH_SHORT).show()
+
                             Log.d("LoginActivity", "Error logging in: ${loginResponse?.message}")
                         }
                     }

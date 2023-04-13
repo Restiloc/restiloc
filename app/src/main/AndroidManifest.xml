@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions pour l'accès internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permissions pour l'accès réseau -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Permissions pour l'accès au GPS -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -16,29 +21,37 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/voiture"
         android:supportsRtl="true"
-
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+
+        <!-- Clé API pour l'accès au GPS -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBlOh1dH_bYPYABqrKDz68kLlv8SsyojyI" />
+
+        <!-- Fait de la landing page la page d'ouverture -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            >
+            android:name=".LandingActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <!-- C'est l'activity du login -->
+        <activity android:name=".LoginActivity" />
+
+        <!-- C'est la MainActivity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value=""
-                />
-
+                android:value="" />
         </activity>
-        <activity android:name=".LoginActivity" />
+
     </application>
 
 </manifest>
