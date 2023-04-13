@@ -10,6 +10,13 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
 
+    <style name="Theme.MyApplication.Dark" parent="Theme.AppCompat.DayNight">
+        <!-- Style pour le mode sombre -->
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/dark_blue</item>
+    </style>
+
     <style name="DayNight">
         <item name="android:background">@color/white</item>
     </style>
@@ -35,6 +42,14 @@
 
     <!-- button settings style text -->
     <style name="SettingsButtonStyle">
+        <item name="android:textColor">@color/white_secondary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/bold</item>
+
+    </style>
+
+    <!-- button pop-up missions style text -->
+    <style name="PopupButtonStyle">
         <item name="android:textColor">@color/white_secondary</item>
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/bold</item>

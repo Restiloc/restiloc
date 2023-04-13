@@ -22,6 +22,8 @@
         android:roundIcon="@mipmap/voiture"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
+        android:forceDarkAllowed="true"
+        android:configChanges="uiMode"
         tools:targetApi="31">
 
         <!-- Clé API pour l'accès au GPS -->
