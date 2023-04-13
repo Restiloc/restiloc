@@ -17,12 +17,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Initialize SessionManager
         val sessionManager = SessionManager(this)
 
         // Check if user is logged in
         if (!sessionManager.isLoggedIn()) {
-            // Navigate to LoginActivity if user is not logged in
-            val intent = Intent(this, LoginActivity::class.java)
+
+            // Navigate to LandingActivity if user is not logged in
+            val intent = Intent(this, LandingActivity::class.java)
            startActivity(intent)
            finish()
           return

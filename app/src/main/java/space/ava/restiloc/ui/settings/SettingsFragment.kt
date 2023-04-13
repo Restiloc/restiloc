@@ -18,7 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import space.ava.restiloc.ApiClient.apiService
 import space.ava.restiloc.ApiInterface
-import space.ava.restiloc.LoginActivity
+import space.ava.restiloc.LandingActivity
 import space.ava.restiloc.R
 import space.ava.restiloc.SessionManager
 import space.ava.restiloc.classes.LogoutResponse
@@ -66,11 +66,11 @@ class SettingsFragment : Fragment() {
                         if (logoutResponse?.status == true) {
                             sessionManager.setLogin(false)
                             // Redirection vers la page de login
-                            val intent = Intent(context, LoginActivity::class.java)
+                            val intent = Intent(context, LandingActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                         } else {
-                            Log.d("LoginActivity", "Error during logout: ${logoutResponse?.message}")
+                            Log.d("LandingActivity", "Error during logout: ${logoutResponse?.message}")
                         }
                     }
                     override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
