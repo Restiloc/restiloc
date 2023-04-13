@@ -7,10 +7,10 @@
     android:padding="16dp">
 
     <ImageView
-        android:layout_width="346dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="-12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
+        android:padding="@dimen/default_padding"
         android:src="@drawable/voiture" />
 
 
@@ -36,7 +36,7 @@
         android:id="@+id/loginButton"
         android:layout_width="202dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginTop="25dp"
         android:background="@drawable/btn_round"
         android:fontFamily="@font/bold"
         android:text="@string/login"

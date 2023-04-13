@@ -9,11 +9,12 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="418dp"
         android:layout_marginTop="-106dp"
         android:layout_marginBottom="@dimen/default_margin"
-        android:contentDescription="@string/app_name"
         android:background="@color/white"
+        android:contentDescription="@string/app_name"
+        android:padding="@dimen/default_padding"
         android:src="@drawable/voiture" />
 
     <TextView
@@ -21,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
         style="@style/TitleTextStyle"
         android:text="@string/title_welcome"
         android:textAlignment="center"
@@ -32,7 +34,8 @@
         style="@style/DefaultTextStyle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
         android:text="@string/landing_description"
         android:textAlignment="center"
         android:textColor="@color/white_secondary"
