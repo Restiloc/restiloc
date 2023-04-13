@@ -157,7 +157,7 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
 
         // Afficher le message d'erreur lorsque la première date est supérieure à la deuxième date
         if (firstCompletedDate.compareTo(secondCompletedDate) > 0) {
-            Toast.makeText(requireContext(), "La première date doit être inférieure à la deuxième date", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "La 1ère date doit être antérieure à la 2ème date", Toast.LENGTH_SHORT).show()
             return
         }
 

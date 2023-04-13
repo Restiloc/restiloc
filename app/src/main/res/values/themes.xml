@@ -17,6 +17,29 @@
         <item name="android:background">@color/blue_primary</item>
     </style>
 
+    <!-- Default style date -->
+    <style name="DateStyle">
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/bold</item>
+
+    </style>
+
+    <!-- Default button style text -->
+    <style name="DefaultButtonStyle">
+        <item name="android:textColor">@color/white_secondary</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/bold</item>
+
+    </style>
+
+    <!-- button settings style text -->
+    <style name="SettingsButtonStyle">
+        <item name="android:textColor">@color/white_secondary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/bold</item>
+
+    </style>
 
     <!-- Default style text -->
     <style name="DefaultTextStyle">

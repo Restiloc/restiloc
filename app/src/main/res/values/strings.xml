@@ -38,9 +38,14 @@
     <string name="expertiser_ce_vehicule">Expertiser ce vehicule</string>
     <string name="plan">Plan</string>
     <string name="login">Login</string>
+    <string name="logout">Se déconnecter</string>
+
     <string name="choose_date">Choisir la date</string>
     <string name="get_stats">Obtenir les stats</string>
-    <string name="date">Date</string>
+    <string name="date_start">Date de début</string>
+    <string name="date_end">Date de fin</string>
+
+    <string name="save">Enregistrer</string>
 
 
 </resources>
