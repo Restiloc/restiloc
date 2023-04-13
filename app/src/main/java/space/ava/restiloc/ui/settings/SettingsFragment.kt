@@ -48,8 +48,6 @@ class SettingsFragment : Fragment() {
             textView.text = it
         }
 
-        val logoutButton = root.findViewById<Button>(R.id.logout)
-
         val retrofit = Retrofit.Builder()
             .baseUrl("https://restiloc.space")
             .addConverterFactory(GsonConverterFactory.create())
@@ -122,7 +120,7 @@ class SettingsFragment : Fragment() {
 
                         sessionManager.setLogin(false)
                         // Redirection vers la page de login
-                        val intent = Intent(context, LoginActivity::class.java)
+                        val intent = Intent(context, LandingActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
@@ -130,7 +128,7 @@ class SettingsFragment : Fragment() {
                         Log.d("Logout", "Error during logout request: ${t.message}")
                         sessionManager.setLogin(false)
                         // Redirection vers la page de login
-                        val intent = Intent(context, LoginActivity::class.java)
+                        val intent = Intent(context, LandingActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
 
