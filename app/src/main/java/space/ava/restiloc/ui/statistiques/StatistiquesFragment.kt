@@ -161,15 +161,6 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
             return
         }
 
-        // Afficher message d'erreur lorsque les dates ne renvoyent pas de données
-
-
-        // Afficher message d'erreur lorsque les dates sont égales
-        if (firstCompletedDate == secondCompletedDate) {
-            Toast.makeText(requireContext(), "Les dates doivent être différentes", Toast.LENGTH_SHORT).show()
-            return
-        }
-
         // Appel à la session
         lateinit var sessionManager: SessionManager
 
@@ -198,6 +189,8 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
             // mettre à jour la liste de statistiques avec les données récupérées
             statsList.clear()
             statsList.addAll(stats)
+
+            // Afficher message d'erreur lorsque les dates ne renvoyent pas de données
             if ( statsList.isEmpty() ) {
                 Toast.makeText(requireContext(), "Aucune donnée disponible pour ces dates", Toast.LENGTH_SHORT).show()
             } else {
