@@ -22,6 +22,14 @@
         <item name="android:background">@color/dark_blue</item>
     </style>
 
+    <!-- Default style date -->
+    <style name="DateStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/bold</item>
+
+    </style>
+
     <style name="DefaultTextStyle">
         <item name="android:textColor">@color/blue_primary</item>
         <item name="android:textSize">18sp</item>
