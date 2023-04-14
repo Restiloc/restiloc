@@ -148,7 +148,7 @@ tools:context=".ui.statistiques.StatistiquesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vertical_recycler_view_stats"
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
         android:layout_height="442dp"
         android:layout_margin="@dimen/default_margin"
         android:layout_marginTop="20dp"
