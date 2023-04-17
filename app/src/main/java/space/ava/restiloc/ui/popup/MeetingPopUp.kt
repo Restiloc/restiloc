@@ -3,9 +3,11 @@ package space.ava.restiloc.ui.popup
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.widget.*
+import com.google.android.gms.common.api.Api
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
@@ -14,7 +16,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import space.ava.restiloc.ApiClient
-import space.ava.restiloc.ApiClient.apiService
 import space.ava.restiloc.R
 import space.ava.restiloc.SessionManager
 import space.ava.restiloc.classes.*
@@ -52,6 +53,15 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
             val titleMap = currentMeeting.client.lastName
 
             setupMap(savedInstanceState, location, titleMap)
+        }
+
+        // j'appuie sur le bouton "expertiser le vehicule
+
+        val expertise = findViewById<Button>(R.id.button)
+        expertise.setOnClickListener{
+            // afficher la popup d'expertise
+            ExpertisePopup(meetingAdapter, currentMeeting).show()
+
         }
 
         // J'appuie sur le bouton "Indisponibilité"
@@ -100,12 +110,12 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
                     val apiService = ApiClient.apiService
 
                     apiService.postUnavailability("Bearer ${sessionManager.fetchAuthToken()}", unavailability)
-                        .enqueue(object : Callback<UnavailabilityResponse> {
-                            override fun onFailure(call: Call<UnavailabilityResponse>, t: Throwable) {
+                        .enqueue(object : Callback<ApiResponse> {
+                            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                                 Toast.makeText(meetingAdapter, "Impossible d'envoyer les données", Toast.LENGTH_SHORT).show()
                             }
 
-                            override fun onResponse(call: Call<UnavailabilityResponse>, response: Response<UnavailabilityResponse>) {
+                            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                                 // si $clientCanceled est true écrire oui sinon non
                                 Toast.makeText(meetingAdapter, "Raison envoyée : $selectedReasonText, Annulé par le client : $clientCanceled ", Toast.LENGTH_SHORT).show()
 
