@@ -93,12 +93,12 @@ class SettingsFragment : Fragment() {
                     token = "Bearer ${sessionManager.fetchAuthToken()}",
                     id = expert.id.toString(),
                     updateRequest = updateRequest
-                ).enqueue(object : Callback<UpdateResponse> {
-                    override fun onResponse(call: Call<UpdateResponse>, response: Response<UpdateResponse>) {
+                ).enqueue(object : Callback<ApiResponse> {
+                    override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                         val updateResponse = response.body()
                         Log.d("Profile", "Update response : ${updateResponse.toString()}")
                     }
-                    override fun onFailure(call: Call<UpdateResponse>, t: Throwable) {
+                    override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                         TODO("Not yet implemented")
                     }
                 })
@@ -113,8 +113,8 @@ class SettingsFragment : Fragment() {
             Log.d("Logout", "Logout button clicked")
 
             apiService.logout("Bearer ${sessionManager.fetchAuthToken()}")
-                .enqueue(object : Callback<LogoutResponse> {
-                    override fun onResponse(call: Call<LogoutResponse>, response: Response<LogoutResponse>) {
+                .enqueue(object : Callback<ApiResponse> {
+                    override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                         val logoutResponse = response.body()
                         Log.d("Logout", logoutResponse.toString())
 
@@ -124,7 +124,7 @@ class SettingsFragment : Fragment() {
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
-                    override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
+                    override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                         Log.d("Logout", "Error during logout request: ${t.message}")
                         sessionManager.setLogin(false)
                         // Redirection vers la page de login
