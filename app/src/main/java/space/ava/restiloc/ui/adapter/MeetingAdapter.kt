@@ -50,7 +50,6 @@ class MeetingAdapter (
         holder.itemView.setOnClickListener {
             // afficher une popup
             MeetingPopUp(holder.itemView.context, currentMeeting, reasonList).show()
-
         }
     }
 
