@@ -1,7 +1,6 @@
 package space.ava.restiloc
 
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
 import space.ava.restiloc.classes.*
 
@@ -16,7 +15,7 @@ interface ApiInterface {
 
     @Headers("Content-Type: application/json")
     @POST("api/auth/logout")
-    fun logout(@Header("Authorization") token: String): Call<LogoutResponse>
+    fun logout(@Header("Authorization") token: String): Call<ApiResponse>
 
     // les information de l'expert
     @GET("api/me")
@@ -27,7 +26,7 @@ interface ApiInterface {
         @Header("Authorization") token: String,
         @Path("id") id: String,
         @Body updateRequest: UpdateRequest
-    ): Call<UpdateResponse>
+    ): Call<ApiResponse>
 
     // récupération de la route des reasons
     @Headers("Content-Type: application/json")
@@ -37,7 +36,7 @@ interface ApiInterface {
     // récupération de la route des unavailabilities
     @Headers("Content-Type: application/json")
     @POST("api/unavailabilities")
-    fun postUnavailability(@Header("Authorization") token: String, @Body request: Unavailability): Call<UnavailabilityResponse>
+    fun postUnavailability(@Header("Authorization") token: String, @Body request: Unavailability): Call<ApiResponse>
 
     @GET("api/stats")
     // récupération de la route des statistiques
@@ -49,5 +48,9 @@ interface ApiInterface {
         @Header("Authorization") token: String,
         @Query("startDate") startDate: String,
         @Query("endDate") endDate: String): List<Stats>
+
+
+    @POST("api/pree")
+    fun addExpertise(@Header("Authorization") token: String, @Body request: PreePost): Call<ApiResponse>
 
 }
