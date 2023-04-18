@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.widget.*
 import com.google.android.gms.common.api.Api
@@ -16,6 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import space.ava.restiloc.ApiClient
+import space.ava.restiloc.MainActivity
 import space.ava.restiloc.R
 import space.ava.restiloc.SessionManager
 import space.ava.restiloc.classes.*
@@ -35,7 +37,8 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
             android.view.ViewGroup.LayoutParams.MATCH_PARENT,
             android.view.ViewGroup.LayoutParams.MATCH_PARENT
         )
-
+        val apiService = ApiClient.apiService
+        val sessionManager = SessionManager(meetingAdapter)
         setupComponents()
         // Regarde si la mission est un garage ou un client
         if (currentMeeting.type == "Garage") {
@@ -62,6 +65,33 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
             // afficher la popup d'expertise
             ExpertisePopup(meetingAdapter, currentMeeting).show()
 
+        }
+
+        // j'appuie sur le bouton cloturer la mission
+        val closeMission = findViewById<Button>(R.id.buttonCloseMission)
+        val request = MissionRequest(true)
+        closeMission.setOnClickListener{
+            // Appel de l'API pour cloturer la mission
+            apiService.closeMission(
+                token = "Bearer ${sessionManager.fetchAuthToken()}",
+                id = currentMeeting.id.toString(), request).enqueue(object : Callback<ApiResponse> {
+                override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(meetingAdapter, "La mission a été cloturée", Toast.LENGTH_SHORT).show()
+                        // retourne à la page d'accueil
+                        dismiss()
+                    }
+                    else {
+                        Toast.makeText(meetingAdapter, "La mission n'a pas pu être cloturée", Toast.LENGTH_SHORT).show()
+                        Log.d("API", "onResponse: ${response.message()} ${request.toString()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                    Toast.makeText(meetingAdapter, "La mission n'a pas pu être cloturée", Toast.LENGTH_SHORT).show()
+                    Log.d("API", "onFailure: ${t.message}")
+                }
+            })
         }
 
         // J'appuie sur le bouton "Indisponibilité"
@@ -100,14 +130,11 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
                     // récupérer la valeur de la checkbox
                     val clientCanceled = checkBox.isChecked
 
-                    val sessionManager = SessionManager(meetingAdapter)
-
                     val unavailability = Unavailability(
                         reason_id = reasonsList[selectedReason].id, // récupérer l'id de la raison sélectionné
                         mission_id = currentMeeting.id, // récupérer l'id de la réunion actuelle
                         customerResponsible = clientCanceled, // récupérer la valeur de la checkbox
                     )
-                    val apiService = ApiClient.apiService
 
                     apiService.postUnavailability("Bearer ${sessionManager.fetchAuthToken()}", unavailability)
                         .enqueue(object : Callback<ApiResponse> {
