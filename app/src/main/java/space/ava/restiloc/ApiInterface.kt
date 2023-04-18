@@ -53,4 +53,8 @@ interface ApiInterface {
     @POST("api/pree")
     fun addExpertise(@Header("Authorization") token: String, @Body request: PreePost): Call<ApiResponse>
 
+
+    @Headers("Content-Type: application/json")
+    @PUT("api/missions/{id}")
+    fun closeMission(@Header("Authorization") token: String, @Path("id") id: String, @Body request: MissionRequest): Call<ApiResponse>
 }
