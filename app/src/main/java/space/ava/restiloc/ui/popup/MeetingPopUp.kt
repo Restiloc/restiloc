@@ -98,7 +98,9 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
         val unavaibilityButton = findViewById<Button>(R.id.buttonUnavaibility)
         unavaibilityButton.setOnClickListener {
             val builder = AlertDialog.Builder(meetingAdapter)
+
             builder.setTitle("Indisponibilité du véhicule")
+
 
             // vérifier si la liste des raisons est vide
             if (reasonsList.isNotEmpty()) {
@@ -107,28 +109,18 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
                 var selectedReason = 0
 
 
-                val checkBox = CheckBox(context)
-                checkBox.text = "Client a annulé"
-                val layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-
-                val margin = meetingAdapter.resources.getDimensionPixelSize(R.dimen.default_margin)
-                layoutParams.setMargins(margin, margin, margin, margin)
-                checkBox.layoutParams = layoutParams
-                builder.setView(checkBox)
 
                 builder.setSingleChoiceItems(reasons, selectedReason) { dialog, which ->
                     // mettre à jour la raison sélectionnée
                     selectedReason = which
                 }
 
+
                 builder.setPositiveButton("OK") { dialog, which ->
                     // récupérer la raison sélectionnée
                     val selectedReasonText = reasonsList[selectedReason].label
                     // récupérer la valeur de la checkbox
-                    val clientCanceled = checkBox.isChecked
+                    val clientCanceled = true
 
                     val unavailability = Unavailability(
                         reason_id = reasonsList[selectedReason].id, // récupérer l'id de la raison sélectionné
