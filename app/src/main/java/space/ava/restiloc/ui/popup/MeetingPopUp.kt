@@ -79,6 +79,8 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
                     if (response.isSuccessful) {
                         Toast.makeText(meetingAdapter, "La mission a été cloturée", Toast.LENGTH_SHORT).show()
                         // retourne à la page d'accueil
+                        val intent = Intent(meetingAdapter, MainActivity::class.java)
+                        meetingAdapter.startActivity(intent)
                         dismiss()
                     }
                     else {
