@@ -1,55 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple"
     android:gravity="center"
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="418dp"
-        android:layout_marginTop="-106dp"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:background="@color/white"
         android:contentDescription="@string/app_name"
         android:padding="@dimen/default_padding"
-        android:src="@drawable/voiture" />
+        android:src="@drawable/voiture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView2"
+        style="@style/TitleTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginBottom="@dimen/default_margin"
-        style="@style/TitleTextStyle"
+        android:elevation="10dp"
         android:text="@string/title_welcome"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 
     <TextView
         android:id="@+id/textView3"
         style="@style/DefaultTextStyle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginBottom="@dimen/default_margin"
         android:text="@string/landing_description"
         android:textAlignment="center"
         android:textColor="@color/white_secondary"
+        android:layout_marginTop="20dp"
         android:textSize="13sp"
+        android:elevation="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="TextSizeCheck" />
 
     <Button
+        android:elevation="20dp"
         android:id="@+id/loginButton"
         android:layout_width="202dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
         android:background="@drawable/btn_round"
         android:fontFamily="@font/bold"
         android:text="@string/login"
-        android:textColor="@color/white_secondary" />
+        android:textColor="@color/white_secondary"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-</LinearLayout>
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@color/purple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout >

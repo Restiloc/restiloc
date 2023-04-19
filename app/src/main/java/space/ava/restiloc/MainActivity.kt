@@ -20,13 +20,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Utilise le style approprié en fonction du mode actuel
-        if (isDarkMode()) {
-            setTheme(R.style.Theme_MyApplication_Dark)
-        } else {
-            setTheme(R.style.Theme_MyApplication)
-        }
-
         // Initialize SessionManager
         val sessionManager = SessionManager(this)
 
@@ -78,8 +71,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun isDarkMode(): Boolean {
-        val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES
-    }
 }
