@@ -1,10 +1,12 @@
 package space.ava.restiloc
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -46,6 +48,9 @@ class MainActivity : AppCompatActivity() {
             val navController = findNavController(R.id.nav_host_fragment_activity_main)
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
+
+
+
             val appBarConfiguration = AppBarConfiguration(
                 setOf(
                     R.id.navigation_planning, R.id.navigation_statistiques, R.id.navigation_settings
@@ -53,6 +58,22 @@ class MainActivity : AppCompatActivity() {
             )
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
+
+            // Définissez votre ColorStateList
+            val colorStateList = ColorStateList(
+                arrayOf(
+                    intArrayOf(android.R.attr.state_checked),
+                    intArrayOf(-android.R.attr.state_checked)
+                ),
+                intArrayOf(
+                    ContextCompat.getColor(this, R.color.blue_primary), // couleur pour les boutons actifs
+                    ContextCompat.getColor(this, R.color.white_secondary) // couleur pour les boutons inactifs
+                )
+            )
+
+// Appliquez la ColorStateList à votre barre de navigation
+            navView.itemTextColor = colorStateList
+            navView.itemIconTintList = colorStateList
         }
 
     }
