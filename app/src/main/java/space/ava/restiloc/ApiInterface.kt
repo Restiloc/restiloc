@@ -5,9 +5,13 @@ import retrofit2.http.*
 import space.ava.restiloc.classes.*
 
 interface ApiInterface {
+    @GET("api/me/missions?p=today")
+    // récupération d'un objet de type Data
+    suspend fun getInfos(@Header("Authorization") token: String): List<Mission>?
+
     @GET("api/me/missions")
     // récupération d'un objet de type Data
-    suspend fun getInfos(@Header("Authorization") token: String): List<Mission>
+    suspend fun getNextMission(@Header("Authorization") token: String): List<Mission>?
 
     @Headers("Content-Type: application/json")
     @POST("api/auth/login")

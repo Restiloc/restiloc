@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -46,6 +47,7 @@ class PlanningFragment() : Fragment() {
         val apiService = ApiClient.apiService
 
         val planningList = ArrayList<Mission>()
+        val planningNextList = ArrayList<Mission>()
         val reasonList = ArrayList<Reason>()
 
         // appel asynchrone de l'API
@@ -55,14 +57,38 @@ class PlanningFragment() : Fragment() {
                 sessionManager = SessionManager(requireContext())
                 val missions = apiService.getInfos( "Bearer ${sessionManager.fetchAuthToken()}")
                 val reasons = apiService.getReasons( "Bearer ${sessionManager.fetchAuthToken()}")
-
+                val nextmission = apiService.getNextMission( "Bearer ${sessionManager.fetchAuthToken()}")
                 Log.d("test", reasons.toString())
-                for (mission in missions) {
-                    planningList.add(mission)
+
+                if (missions != null) {
+                    for (mission in missions) {
+                        planningList.add(mission)
+                    }
                 }
+                if (planningList.isEmpty()) {
+                    val noMission : TextView = root.findViewById(R.id.nomission)
+                    noMission.visibility = View.VISIBLE
+                }
+
+                if (nextmission != null) {
+                    for (mission in nextmission) {
+                        planningNextList.add(mission)
+                    }
+                }
+
+                if (planningNextList.isEmpty()) {
+                    val noMission2 : TextView = root.findViewById(R.id.nomission2)
+                    noMission2.visibility = View.VISIBLE
+                }
+
+
                 for (reason in reasons) {
                     reasonList.add(reason)
                 }
+
+                val verticalRecyclerView2 = root.findViewById<RecyclerView>(R.id.vertical_recycler_view2)
+                verticalRecyclerView2?.adapter = MeetingAdapter(planningNextList, reasonList, R.layout.item_horizontal_folder)
+
                 val verticalRecyclerView = root.findViewById<RecyclerView>(R.id.vertical_recycler_view)
 
                 verticalRecyclerView?.adapter = MeetingAdapter(planningList, reasonList, R.layout.item_horizontal_folder)

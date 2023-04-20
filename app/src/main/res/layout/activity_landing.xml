@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
+        android:layout_marginTop="@dimen/default_margin"
         android:text="@string/title_welcome"
         android:textAlignment="center"
         android:textColor="@color/white"
