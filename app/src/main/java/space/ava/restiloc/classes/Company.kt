@@ -5,5 +5,4 @@ class Company (
     val name : String,
     val created_at : String,
     val updated_at : String,
-
-        )
+)

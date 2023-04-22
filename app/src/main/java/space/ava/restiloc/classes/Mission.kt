@@ -12,6 +12,7 @@ data class Mission(
     val vehicle: Vehicle,
     val expert: Expert,
     val garage: Garage,
+    val client: Client,
     val unavailability: Unavailability,
     val pree: List<Pree>,
 )

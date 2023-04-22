@@ -32,8 +32,11 @@ class SessionManager(context: Context) {
         return sharedPreferences.getBoolean("isLoggedIn", false)
     }
 
-    fun setLogin(isLoggedIn: Boolean) {
+    fun setLogin(isLoggedIn: Boolean = false )  {
         editor.putBoolean("isLoggedIn", isLoggedIn)
+        if (!isLoggedIn) {
+            editor.remove(USER_TOKEN)
+        }
         editor.apply()
     }
 }

@@ -1,10 +1,12 @@
 package space.ava.restiloc
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -37,25 +39,14 @@ class LoginActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString()
 
 
-            val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
-                })
-                .build()
+            val apiService = ApiClient.apiService
 
-// Créez un objet Retrofit avec l'encodage JSON et le client OkHttp
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://restiloc.space/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build()
-
-            val apiService = retrofit.create(ApiInterface::class.java)
 
             apiService.login(LoginRequest( username = username, password = password))
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                         // Error logging in
+                        Toast.makeText(this@LoginActivity, "Une erreur s'est produite, veuillez réessayer.", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
@@ -66,11 +57,18 @@ class LoginActivity : AppCompatActivity() {
 
                             sessionManager.setLogin(true)
                             // appeler la fonction login()
+                            Toast.makeText(this@LoginActivity, "Bonjour", Toast.LENGTH_SHORT).show()
                             Log.d("LoginActivity", "Login successful: ${loginResponse.token}")
                             continuetoMainActivity()
 
                         } else {
                             // Error logging in
+                            sessionManager.setLogin(false)
+
+                            // mettre isLogin à false
+
+                            Toast.makeText(this@LoginActivity, "Les identifiants ne sont pas corrects", Toast.LENGTH_SHORT).show()
+
                             Log.d("LoginActivity", "Error logging in: ${loginResponse?.message}")
                         }
                     }
@@ -83,4 +81,5 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
 }

@@ -8,11 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import space.ava.restiloc.R
 import space.ava.restiloc.classes.Mission
+import space.ava.restiloc.classes.Reason
 import space.ava.restiloc.ui.popup.MeetingPopUp
 
 
 class MeetingAdapter (
     private val planningList : List<Mission>,
+    private val reasonList : List<Reason>,
     private val layoutId: Int) : RecyclerView.Adapter<MeetingAdapter.ViewHolder>()
 {
 
@@ -47,8 +49,7 @@ class MeetingAdapter (
         // interaction avec le composant
         holder.itemView.setOnClickListener {
             // afficher une popup
-            MeetingPopUp(holder.itemView.context, currentMeeting).show()
-
+            MeetingPopUp(holder.itemView.context, currentMeeting, reasonList).show()
         }
     }
 
