@@ -9,6 +9,5 @@ data class Vehicle(
     val route: String,
     val model: Model,
     val company: Company,
-
-
+    val contract: Contract,
 )

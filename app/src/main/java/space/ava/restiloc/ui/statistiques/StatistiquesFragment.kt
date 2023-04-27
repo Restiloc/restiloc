@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import space.ava.restiloc.ApiClient
 import space.ava.restiloc.ApiInterface
 import space.ava.restiloc.R
 import space.ava.restiloc.SessionManager
@@ -77,14 +78,9 @@ class StatistiquesFragment() : Fragment(), DatePickerDialog.OnDateSetListener {
         lateinit var sessionManager: SessionManager
 
         // recuperer les données de l'API
+        val apiService = ApiClient.apiService
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://restiloc.space/")
-            //.baseUrl("http://127.0.0.1:8000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val apiService = retrofit.create(ApiInterface::class.java)
+        // Creation d'une liste de stats
         val statsList = ArrayList<Stats>()
 
         // appel asynchrone de l'API

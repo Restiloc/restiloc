@@ -202,6 +202,21 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
         val color = findViewById<TextView>(R.id.pop_up_car_color_detail)
         color.text = currentMeeting.vehicle.color
 
+        // nom de l'assurance
+        val nameInsurance = findViewById<TextView>(R.id.pop_up_car_name_insurance_detail)
+        nameInsurance.text = currentMeeting.vehicle.contract.insurance.name
+
+        // adresse de l'assurance
+        val adress = findViewById<TextView>(R.id.pop_up_car_adress_insurance_detail)
+        adress.text = currentMeeting.vehicle.contract.insurance.addressNumber + ", " + currentMeeting.vehicle.contract.insurance.street
+
+        // ville de l'assurance
+        val city = findViewById<TextView>(R.id.pop_up_car_city_insurance_detail)
+        city.text = currentMeeting.vehicle.contract.insurance.postalCode + ", " + currentMeeting.vehicle.contract.insurance.city
+
+        // téléphone de l'assurance
+        val number = findViewById<TextView>(R.id.pop_up_car_number_insurance_detail)
+        number.text = currentMeeting.vehicle.contract.insurance.phoneNumber
 
 
         // close button

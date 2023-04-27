@@ -72,6 +72,13 @@
 
     </style>
 
+    <style name="SubtitleTextStyle2" parent="DefaultTextStyle">
+        <item name="android:textSize">23sp</item>
+        <item name="android:fontFamily">@font/bold</item>
+
+    </style>
+
+
 
     <!-- Créer le composant titre par défaut -->
     <style name="TitleTextStyle" parent="SubtitleTextStyle">

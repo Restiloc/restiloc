@@ -1,9 +1,9 @@
 package space.ava.restiloc.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import space.ava.restiloc.R
@@ -23,6 +23,7 @@ class MeetingAdapter (
         //val meetingImage: ImageView = view.findViewById(R.id.image_item)
         val meetingName:TextView? = view.findViewById(R.id.name_item)
         val meetingDescription:TextView? = view.findViewById(R.id.description_item)
+        val insuranceName:TextView? = view.findViewById(R.id.name_insurance)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -43,7 +44,7 @@ class MeetingAdapter (
         //    .into(holder.meetingImage)
         holder.meetingName?.text = currentMeeting.folder
         holder.meetingDescription?.text = currentMeeting.startedAt.substring(0, 5)
-
+        holder.insuranceName?.text = currentMeeting.vehicle.contract.insurance.name
 
 
         // interaction avec le composant
