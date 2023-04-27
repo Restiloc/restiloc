@@ -12,7 +12,7 @@
 
     <!-- Subtitle -->
     <string name="description">Description</string>
-    <string name="insurance">Insurance</string>
+    <string name="insurance">Assurance</string>
     <string name="informations">Les informations détaillées</string>
     <string name="landing_description">L\'application qui vous permettra d\'effectuer vos expertises.</string>
 
@@ -38,15 +38,15 @@
     <string name="random_couleur">Random Couleur</string>
 
     <!-- Insurance informations -->
-    <string name="insuance_infos">Informations Assurance</string>
-    <string name="name_insuance_car">Nom</string>
-    <string name="random_name_insuance_car">Random Name</string>
-    <string name="adress_insuance_car">Adresse</string>
-    <string name="random_adress_insuance_car">Random Adresse</string>
-    <string name="city_insuance_car">Ville</string>
-    <string name="random_city_insuance_car">Random Ville</string>
-    <string name="number_insuance_car">Téléphone</string>
-    <string name="random_number_insuance_car">Random Téléphone</string>
+    <string name="insurance_infos">Informations Assurance</string>
+    <string name="name_insurance_car">Nom</string>
+    <string name="random_name_insurance_car">Random Name</string>
+    <string name="adress_insurance_car">Adresse</string>
+    <string name="random_adress_insurance_car">Random Adresse</string>
+    <string name="city_insurance_car">Ville</string>
+    <string name="random_city_insurance_car">Random Ville</string>
+    <string name="number_insurance_car">Téléphone</string>
+    <string name="random_number_insurance_car">Random Téléphone</string>
     <string name="expertiser_ce_vehicule">Expertiser ce vehicule</string>
     <string name="plan">Plan</string>
     <string name="login">Login</string>

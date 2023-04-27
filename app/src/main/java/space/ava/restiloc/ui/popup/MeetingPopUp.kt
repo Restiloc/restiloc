@@ -212,7 +212,7 @@ class MeetingPopUp(private val meetingAdapter: Context, private val currentMeeti
 
         // ville de l'assurance
         val city = findViewById<TextView>(R.id.pop_up_car_city_insurance_detail)
-        city.text = currentMeeting.vehicle.contract.insurance.postalCode + ", " + currentMeeting.vehicle.contract.insurance.city
+        city.text = currentMeeting.vehicle.contract.insurance.postalCode + " " + currentMeeting.vehicle.contract.insurance.city
 
         // téléphone de l'assurance
         val number = findViewById<TextView>(R.id.pop_up_car_number_insurance_detail)

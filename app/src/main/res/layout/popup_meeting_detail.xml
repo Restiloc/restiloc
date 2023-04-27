@@ -202,7 +202,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginStart="@dimen/default_margin"
-        android:text="@string/insuance_infos"
+        android:text="@string/insurance_infos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_car_color_detail" />
 
@@ -213,7 +213,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginStart="@dimen/default_margin"
-        android:text="@string/name_insuance_car"
+        android:text="@string/name_insurance_car"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_car_info_insurance" />
 
@@ -224,7 +224,7 @@
         android:layout_marginStart="@dimen/default_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/random_name_insuance_car"
+        android:text="@string/random_name_insurance_car"
         android:layout_marginEnd="@dimen/default_margin"
         app:layout_constraintBottom_toBottomOf="@+id/pop_up_car_name_insurance"
         app:layout_constraintEnd_toEndOf="parent"
@@ -237,7 +237,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginStart="@dimen/default_margin"
-        android:text="@string/adress_insuance_car"
+        android:text="@string/adress_insurance_car"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_car_name_insurance_detail" />
 
@@ -247,7 +247,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/default_margin"
-        android:text="@string/random_adress_insuance_car"
+        android:text="@string/random_adress_insurance_car"
         app:layout_constraintBottom_toBottomOf="@+id/pop_up_car_adress_insurance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pop_up_car_adress_insurance" />
@@ -260,7 +260,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginStart="@dimen/default_margin"
-        android:text="@string/city_insuance_car"
+        android:text="@string/city_insurance_car"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_car_adress_insurance_detail" />
 
@@ -270,7 +270,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/default_margin"
-        android:text="@string/random_city_insuance_car"
+        android:text="@string/random_city_insurance_car"
         app:layout_constraintBottom_toBottomOf="@+id/pop_up_car_city_insurance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pop_up_car_city_insurance" />
@@ -282,7 +282,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginStart="@dimen/default_margin"
-        android:text="@string/number_insuance_car"
+        android:text="@string/number_insurance_car"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pop_up_car_city_insurance_detail" />
 
@@ -292,7 +292,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/default_margin"
-        android:text="@string/random_number_insuance_car"
+        android:text="@string/random_number_insurance_car"
         app:layout_constraintBottom_toBottomOf="@+id/pop_up_car_number_insurance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pop_up_car_number_insurance" />
