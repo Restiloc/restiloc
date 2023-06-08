@@ -9,6 +9,37 @@
 
 
     <TextView
+        android:id="@+id/Presentation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TitleTextStyle"
+        android:layout_marginBottom="80dp"
+        android:layout_margin="@dimen/default_margin"
+        android:text="Vos photos d'expertise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/photo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="Prendre une photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Presentation" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photo_button" />
+
+    <TextView
         android:id="@+id/textView"
         style="@style/TitleTextStyle"
         android:layout_width="wrap_content"
@@ -16,7 +47,7 @@
         android:layout_margin="@dimen/default_margin"
         android:text="Vos missions du jour"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/nomission"
@@ -28,6 +59,8 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vertical_recycler_view"

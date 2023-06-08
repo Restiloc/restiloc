@@ -1,10 +1,15 @@
 package space.ava.restiloc
 
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 import space.ava.restiloc.classes.*
 
 interface ApiInterface {
+
+    @POST("api/pree/{id}")
+    fun uploadPhoto(@Header("Authorization") token: String, @Path("id") id: RequestBody, @Body request: PreePost): Call<ApiResponse>
+
     @GET("api/me/missions?p=today")
     // récupération d'un objet de type Data
     suspend fun getInfos(@Header("Authorization") token: String): List<Mission>?
@@ -61,4 +66,7 @@ interface ApiInterface {
     @Headers("Content-Type: application/json")
     @PUT("api/missions/{id}")
     fun closeMission(@Header("Authorization") token: String, @Path("id") id: String, @Body request: MissionRequest): Call<ApiResponse>
+    abstract fun uploadPhoto(token: String, id: RequestBody): Call<ApiResponse>
 }
+
+
